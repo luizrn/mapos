@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>MAPOS</title>
     <meta charset="UTF-8" />
@@ -12,22 +11,16 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/main.css" />
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/blue.css" class="skin-color" />
 </head>
-
 <body style="background-color: transparent">
-
     <div class="container-fluid">
-
         <div class="row-fluid">
             <div class="span12">
-
                 <div class="widget-box">
                     <?= $topo ?>
-
                     <div class="widget-title">
                         <h4 style="text-align: center">Relatório Financeiro</h4>
                     </div>
                     <div class="widget-content nopadding tab-content">
-
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -49,7 +42,6 @@
                                 $saldo = 0;
                                 foreach ($lancamentos as $l) {
                                     $vencimento = date('d/m/Y', strtotime($l->data_vencimento));
-                                    $pagamento = date('d/m/Y', strtotime($l->data_pagamento));
                                     if ($l->baixado == 1) {
                                         $situacao = 'Pago';
                                     } else {
@@ -60,11 +52,10 @@
                                     } else {
                                         $totalDespesa += $l->valor_desconto;
                                     }
-
-                                    if ($pagamento == "0000-00-00") {
+                                    if ($l->data_pagamento == "0000-00-00") {
                                         $pagamento = "Não informado";
                                     } else {
-                                        $pagamento = date('d/m/Y', strtotime($pagamento));
+                                        $pagamento = date('d/m/Y', strtotime($l->data_pagamento));
                                     }
                                     echo '<tr>';
                                     echo '<td>' . $l->cliente_fornecedor . '</td>';
@@ -118,10 +109,8 @@
                 <h5 style="text-align: right">Data do Relatório:
                     <?php echo date('d/m/Y'); ?>
                 </h5>
-
             </div>
         </div>
     </div>
 </body>
-
 </html>
